@@ -1,0 +1,27 @@
+services:
+  db:
+    image: 'postgres:15-alpine'
+    container_name: wb_db
+    environment:
+      - POSTGRES_DB=dbWB
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5433:5432"
+  nats:
+    image: nats
+    entrypoint: /nats-server
+    command: "-js -m 5555"
+    ports:
+      - 4222:4222
+      - 5555:5555
+  nats-exporter:
+    image: natsio/prometheus-nats-exporter:0.8.0
+    command: "-jsz all http://nats:5555"
+    ports:
+      - 7777:7777
+    depends_on:
+      - nats
+
+
+

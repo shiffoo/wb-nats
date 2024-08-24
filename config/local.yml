@@ -1,0 +1,20 @@
+env: local
+
+server:
+  url: localhost:8080
+
+nats:
+  url: nats://localhost:4222
+  stream-name: ORDERS
+  stream-subjects: ORDERS.*
+  subject-name: ORDERS.created
+  subscriber: subscriber1234
+
+db:
+  user: postgres
+  password: postgres
+  name: dbWB
+  host: localhost
+  port: 5433
+
+
